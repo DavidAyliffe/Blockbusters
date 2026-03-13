@@ -12,9 +12,8 @@ OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "avatars")
 CSV_PATH = "/Users/Dayliffe/Downloads/Untitled.csv"
 STYLE = "personas"
 
-
-def title_case(s):
-    return s.strip().capitalize()
+# Exclude pacifier from mouth options
+ALLOWED_MOUTHS = "bigSmile,frown,lips,smile,smirk,surprise"
 
 
 def make_seed(first, last, sex):
@@ -30,6 +29,7 @@ def download_avatar(first_name, last_name, sex, filepath):
         "size": AVATAR_SIZE,
         "backgroundColor": "e8f4f8",
         "radius": 50,
+        "mouth": ALLOWED_MOUTHS,
     }
 
     query = urllib.parse.urlencode(params)
@@ -52,23 +52,24 @@ def main():
     print(f"Generating {total} avatars using DiceBear ({STYLE} style)...\n")
 
     for i, row in enumerate(rows, 1):
+        customer_id = row["customer_id"].strip()
         first = row["first_name"].strip()
         last = row["last_name"].strip()
         sex = row["sex"].strip()
 
-        filename = f"{title_case(first)}_{title_case(last)}.png"
+        filename = f"{customer_id}.png"
         filepath = os.path.join(OUTPUT_DIR, filename)
 
         # Skip if already generated (resume-friendly)
         if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
-            print(f"  [{i}/{total}] {title_case(first)} {title_case(last)} — already exists, skipping")
+            print(f"  [{i}/{total}] #{customer_id} {first} {last} — already exists, skipping")
             continue
 
         try:
             download_avatar(first, last, sex, filepath)
-            print(f"  [{i}/{total}] {title_case(first)} {title_case(last)} ✓")
+            print(f"  [{i}/{total}] #{customer_id} {first} {last} ✓")
         except Exception as e:
-            print(f"  [{i}/{total}] {title_case(first)} {title_case(last)} ✗ Error: {e}")
+            print(f"  [{i}/{total}] #{customer_id} {first} {last} ✗ Error: {e}")
 
     print(f"\nDone! Avatars saved to: {OUTPUT_DIR}")
 
