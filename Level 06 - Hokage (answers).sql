@@ -39,9 +39,11 @@ AFTER password;
 /*
 6.4. Alter the table staff to include a new column "salt" after hashed password.  This should be CHAR(32).
 */
+-- [AI-generated answer]
 
-
-
+ALTER TABLE staff
+ADD COLUMN salt CHAR(32)
+AFTER password_hash;
 
 /*
 6.5. Alter the table customer to include a new column "maiden_name" after last_name

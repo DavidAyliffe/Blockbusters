@@ -27,8 +27,10 @@ insert into region (name) values ('Oceania');
 /*
 7.2. Run "Level 06 - locations_insert_statements.sql" and populate the new 'locations' table.
 */
+-- [AI-generated answer]
+-- Run the file directly in MySQL Workbench, or use SOURCE:
 
-
+SOURCE Level 06 - locations_insert_statements.sql;
 
 /*
 7.3. Add these cities to the database:  Venice in Italy
@@ -86,26 +88,89 @@ insert into store (name, address_id) values ("Reel Retro Haven", LAST_INSERT_ID(
 7.5. Create a new rental for a new customer who lives in St. Petersburg, Russia
 	 HINT: Add St. Petersburg as a city first.
 */
+-- [AI-generated answer]
 
+-- Step 1: Add St. Petersburg as a city (Russia has country_id 80)
+INSERT INTO city (name, country_id) VALUES ('St. Petersburg', 80);
 
+-- Step 2: Add an address in St. Petersburg
+INSERT INTO address (address, district, city_id, postal_code, phone)
+VALUES ('25 Nevsky Prospekt', 'Admiralteysky', LAST_INSERT_ID(), '190000', '+7 812 555 1234');
+
+-- Step 3: Add a new customer at that address
+INSERT INTO customer (store_id, first_name, last_name, email, address_id, active)
+VALUES (1, 'IVAN', 'PETROV', 'IVAN.PETROV@example.org', LAST_INSERT_ID(), 1);
+
+-- Step 4: Create a rental for that customer
+INSERT INTO rental (rental_date, inventory_id, customer_id, staff_id, due_date)
+VALUES (NOW(), 1, LAST_INSERT_ID(), 1, DATE_ADD(NOW(), INTERVAL 7 DAY));
 
 /*
-7.6. Insert the data in "Level 06 - ceremonies.csv" into the table you have created. 
+7.6. Insert the data in "Level 06 - ceremonies.csv" into the table you have created.
 	HINT:  ChatGPT will help you format the rows as insert statements.
 */
+-- [AI-generated answer]
+-- Note: Some rows in the CSV have city names instead of city_ids. These need city_ids looked up or inserted first.
+-- The rows below use the city_ids provided in the CSV where available.
 
+INSERT INTO ceremony (name, city_id) VALUES ('AACTA Awards (Australian Academy of Cinema and Television Arts)', 604);
+INSERT INTO ceremony (name, city_id) VALUES ('BAFTA Awards', 312);
+INSERT INTO ceremony (name, city_id) VALUES ('Berlin International Film Festival (Berlinale)', 198);
+INSERT INTO ceremony (name, city_id) VALUES ('Blue Dragon Film Awards', 113);
+INSERT INTO ceremony (name, city_id) VALUES ('British Independent Film Awards', 312);
+INSERT INTO ceremony (name, city_id) VALUES ('Csar Awards', 543);
+INSERT INTO ceremony (name, city_id) VALUES ('David di Donatello Awards', 93);
+INSERT INTO ceremony (name, city_id) VALUES ('Filmfare Awards', 336);
+INSERT INTO ceremony (name, city_id) VALUES ('Goya Awards', 1);
+INSERT INTO ceremony (name, city_id) VALUES ('Indian National Film Awards', 75);
+INSERT INTO ceremony (name, city_id) VALUES ('Japan Academy Prize', 552);
+INSERT INTO ceremony (name, city_id) VALUES ('Moscow International Film Festival', 343);
+INSERT INTO ceremony (name, city_id) VALUES ('Shanghai International Film Festival', 46);
+INSERT INTO ceremony (name, city_id) VALUES ('Toronto International Film Festival (TIFF)', 179);
 
+-- These rows reference cities added in 7.3 — use the city_ids from those inserts:
+-- INSERT INTO ceremony (name, city_id) VALUES ('Asia Pacific Screen Awards', <brisbane_city_id>);
+-- INSERT INTO ceremony (name, city_id) VALUES ('Cannes Film Festival', <cannes_city_id>);
+-- INSERT INTO ceremony (name, city_id) VALUES ('Hong Kong Film Awards', <hong_kong_city_id>);
+-- INSERT INTO ceremony (name, city_id) VALUES ('Karlovy Vary International Film Festival', <karlovy_vary_city_id>);
+-- INSERT INTO ceremony (name, city_id) VALUES ('Magritte Awards', <brussels_city_id>);
+-- INSERT INTO ceremony (name, city_id) VALUES ('Primetime Emmy Awards', <los_angeles_city_id>);
+-- INSERT INTO ceremony (name, city_id) VALUES ('Academy Awards (Oscars)', <los_angeles_city_id>);
+-- INSERT INTO ceremony (name, city_id) VALUES ('Independent Spirit Awards', <los_angeles_city_id>);
+-- INSERT INTO ceremony (name, city_id) VALUES ('Golden Globe Awards', <los_angeles_city_id>);
+-- INSERT INTO ceremony (name, city_id) VALUES ('Critics Choice Television Awards', <los_angeles_city_id>);
+-- INSERT INTO ceremony (name, city_id) VALUES ('Screen Actors Guild (SAG) Awards', <los_angeles_city_id>);
+-- INSERT INTO ceremony (name, city_id) VALUES ('Venice Film Festival Awards', <venice_city_id>);
 
 /*
-7.7. Insert the data in "Level 06 - awards.csv" into the table you have created. 
+7.7. Insert the data in "Level 06 - awards.csv" into the table you have created.
 	HINT:  ChatGPT will help you format the rows as insert statements.
 */
+-- [AI-generated answer]
 
-
+INSERT INTO award (name, description) VALUES ('Best Actor', 'Given to the best male lead performance.');
+INSERT INTO award (name, description) VALUES ('Best Actress', 'Given to the best female lead performance.');
+INSERT INTO award (name, description) VALUES ('Best Supporting Actor', 'Recognizes a standout performance in a supporting role (male).');
+INSERT INTO award (name, description) VALUES ('Best Supporting Actress', 'Recognizes a standout performance in a supporting role (female).');
 
 /*
 7.8. Insert some random data into your new 'awards' table.
 */
+-- [AI-generated answer]
+-- Example: link award ceremonies to awards with random years
 
+INSERT INTO award_ceremony (ceremony_id, award_id) VALUES (1, 1);
+INSERT INTO award_ceremony (ceremony_id, award_id) VALUES (1, 2);
+INSERT INTO award_ceremony (ceremony_id, award_id) VALUES (2, 1);
+INSERT INTO award_ceremony (ceremony_id, award_id) VALUES (2, 2);
+INSERT INTO award_ceremony (ceremony_id, award_id) VALUES (3, 3);
+INSERT INTO award_ceremony (ceremony_id, award_id) VALUES (3, 4);
+
+-- Example: nominate/award some actors
+INSERT INTO actor_award_ceremony (actor_id, status) VALUES (1, 'Won');
+INSERT INTO actor_award_ceremony (actor_id, status) VALUES (2, 'Nominated');
+INSERT INTO actor_award_ceremony (actor_id, status) VALUES (3, 'Won');
+INSERT INTO actor_award_ceremony (actor_id, status) VALUES (10, 'Nominated');
+INSERT INTO actor_award_ceremony (actor_id, status) VALUES (20, 'Won');
 
 
