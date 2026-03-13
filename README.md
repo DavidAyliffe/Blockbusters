@@ -42,13 +42,33 @@ The `blockbusters` database models a video rental company with the following cor
 ## 📂 Project Structure
 
 ```
-├── Level XX - <Rank>.sql              # 📝 Challenge questions
-├── Level XX - <Rank> (answers).sql    # ✅ Answer keys
-├── Level 06 - *.csv                   # 📊 CSV data for imports (awards, ceremonies)
-├── Level 06 - locations_insert_statements.sql
-├── Level 07 - Example Spatial Query.sql
-├── Level 08 - maiden names.csv
-└── Databases Homework Booklet v4.docx # 📘 Comprehensive guide document
+📁 Blockbusters/
+│
+├── 📝 SQL Challenges & Answer Keys
+│   ├── Level 01 - Academy Ninja.sql / (answers).sql
+│   ├── Level 02 - Genin.sql / (answers).sql
+│   ├── Level 03 - Chunin.sql / (answers).sql
+│   ├── Level 04 - ANBU.sql / (answers).sql
+│   ├── Level 05 - Jonin.sql / (answers).sql
+│   ├── Level 06 - Hokage (answers).sql
+│   ├── Level 07 - Minato.sql / (answers).sql
+│   ├── Level 08 - Missing Ninja.sql / (answers).sql
+│   ├── Level 09 - Kage.sql / (answers).sql
+│   └── Level 10 - Master Ninja.sql / (answers).sql
+│
+├── 📊 Data Files
+│   ├── Level 06 - award.csv
+│   ├── Level 06 - ceremony.csv
+│   ├── Level 06 - award_ceremony.csv
+│   ├── Level 06 - actor award ceremony.csv
+│   ├── Level 06 - locations_insert_statements.sql
+│   ├── Level 07 - Example Spatial Query.sql
+│   └── Level 08 - maiden names.csv
+│
+├── 🖼️ avatars/                        # 599 customer avatar PNGs (named by customer_id)
+├── 🐍 generate_avatars.py             # Script to regenerate avatars via DiceBear API
+├── 📘 Databases Homework Booklet v4.docx
+└── 📄 README.md
 ```
 
 ## ✅ Prerequisites
